@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /*
  * JmsTemplate simplifies receiving and sending of messages through JMS and gets rid of the boilerplate code 
  * It is the helper class that simplifies synchronous JMS access code and central class for Spring JMS integration
- *In JmsTemplate by default the transaction and acknowledgement mode are disable, 
+ * In JmsTemplate by default the transaction and acknowledgement mode are disable, 
  * if you want transaction and acknowledgement we need to configure on property file.
  * While doing transaction we need to take care settings. 
  *
