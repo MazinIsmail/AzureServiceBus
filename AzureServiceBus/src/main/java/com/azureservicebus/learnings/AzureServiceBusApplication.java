@@ -19,10 +19,10 @@ import org.springframework.jms.annotation.EnableJms;
 @SpringBootApplication
 @ComponentScan("com.azureservicebus.learnings*")
 @EnableJms
-public class AzureServiceBusJMSQueueApplication {
+public class AzureServiceBusApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AzureServiceBusJMSQueueApplication.class, args);
+		SpringApplication.run(AzureServiceBusApplication.class, args);
 	}
 
 }
