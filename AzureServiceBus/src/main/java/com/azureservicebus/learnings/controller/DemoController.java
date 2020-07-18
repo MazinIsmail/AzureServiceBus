@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.azureservicebus.learnings.sender.MessageSender;
+import com.azureservicebus.learnings.queue.QueueSender;
 
 @RestController
 public class DemoController {
 
 	@Autowired
-	private MessageSender mSender;
+	private QueueSender mSender;
 
 	public static final Logger logger = LoggerFactory.getLogger(DemoController.class);
 

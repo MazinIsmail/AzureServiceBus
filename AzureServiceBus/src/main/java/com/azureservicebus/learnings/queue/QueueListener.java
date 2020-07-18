@@ -1,4 +1,4 @@
-package com.azureservicebus.learnings.listerner;
+package com.azureservicebus.learnings.queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class MessageListener {
-	public static final Logger logger = LoggerFactory.getLogger(MessageListener.class);
+public class QueueListener {
+	public static final Logger logger = LoggerFactory.getLogger(QueueListener.class);
 
 	@JmsListener(destination = "${azure.servicebus.queuename}", containerFactory = "jmsListenerContainerFactory")
 	public void messageReceiver(String message) {

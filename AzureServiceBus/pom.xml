@@ -29,6 +29,16 @@
 			<artifactId>azure-servicebus-jms-spring-boot-starter</artifactId>
 			<version>2.1.7</version>
 		</dependency>
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>spring-cloud-azure-servicebus-queue-stream-binder</artifactId>
+			<version>1.1.0.RC5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>spring-cloud-azure-servicebus-topic-stream-binder</artifactId>
+			<version>1.1.0.RC5</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -1,4 +1,4 @@
-package com.azureservicebus.learnings.sender;
+package com.azureservicebus.learnings.queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class MessageSender {
+public class QueueSender {
 
 	@Autowired
 	private Environment env;
@@ -27,7 +27,7 @@ public class MessageSender {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
-	public static final Logger logger = LoggerFactory.getLogger(MessageSender.class);
+	public static final Logger logger = LoggerFactory.getLogger(QueueSender.class);
 
 	public void postMessage(String megString) {
 		logger.debug("Start : postMessage() ");
