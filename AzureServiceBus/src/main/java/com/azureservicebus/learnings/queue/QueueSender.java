@@ -1,9 +1,16 @@
 package com.azureservicebus.learnings.queue;
 
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Session;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.jms.JmsException;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
@@ -33,8 +40,31 @@ public class QueueSender {
 		logger.debug("Start : postMessage() ");
 		String queueName = env.getProperty("azure.servicebus.queuename");
 		logger.info("Message is {}", megString);
-		jmsTemplate.convertAndSend(queueName, megString);
-		logger.info("Message has been sent :)  ");
+		logger.info("Queue is {}", queueName);
+		try {
+			jmsTemplate.convertAndSend(queueName, megString);
+		} catch (JmsException e) {
+			ConnectionFactory connectionFactory = null;
+			Connection connection = null;
+			Session session = null;
+			try {
+				connectionFactory = jmsTemplate.getConnectionFactory();
+				connection = connectionFactory.createConnection();
+				connection.start();
+				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+				Destination destination = session.createQueue(queueName);
+				jmsTemplate.convertAndSend(queueName, megString);
+			} catch (JmsException | JMSException e1) {
+				logger.error("Error :: postMessage :: {}", e1);
+			} finally {
+				try {
+					session.close();
+					connection.close();
+				} catch (JMSException e1) {
+					logger.error("Error :: postMessage Closing Resource Failed :: {}", e1);
+				}
+			}
+		}
 		logger.debug("End : postMessage() ");
 	}
 
