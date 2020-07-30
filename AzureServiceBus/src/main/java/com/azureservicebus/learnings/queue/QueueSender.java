@@ -56,13 +56,6 @@ public class QueueSender {
 				jmsTemplate.convertAndSend(queueName, megString);
 			} catch (JmsException | JMSException e1) {
 				logger.error("Error :: postMessage :: {}", e1);
-			} finally {
-				try {
-					session.close();
-					connection.close();
-				} catch (JMSException e1) {
-					logger.error("Error :: postMessage Closing Resource Failed :: {}", e1);
-				}
 			}
 		}
 		logger.debug("End : postMessage() ");
