@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.jms.JmsException;
+import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +43,11 @@ public class QueueSender {
 		logger.info("Message is {}", megString);
 		logger.info("Queue is {}", queueName);
 		try {
+			CachingConnectionFactory cacheConnectionFactory = (CachingConnectionFactory) jmsTemplate
+					.getConnectionFactory();
+			cacheConnectionFactory.setCacheProducers(false);
 			jmsTemplate.convertAndSend(queueName, megString);
+			logger.info("Message posted: " + megString);
 		} catch (JmsException e) {
 			ConnectionFactory connectionFactory = null;
 			Connection connection = null;
